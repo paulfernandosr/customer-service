@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.nttdata</groupId>
     <artifactId>customer-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>customer-service</name>
     <description>customer-service</description>
     <properties>
@@ -52,7 +52,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${project.parent.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>

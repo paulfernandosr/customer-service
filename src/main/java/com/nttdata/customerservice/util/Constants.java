@@ -33,13 +33,18 @@ public class Constants {
     public static final String PERSONAL_CUSTOMERS_COLLECTION = "personalCustomers";
     public static final String BUSINESS_CUSTOMERS_COLLECTION = "businessCustomers";
 
-    // Paths
-    public static final String CONTROLLER_PERSONAL_BASE_PATH = "${controller.personal.base-path}";
-    public static final String CONTROLLER_BUSINESS_BASE_PATH = "${controller.business.base-path}";
-    public static final String CONTROLLER_METHOD_GET_ALL = "${controller.method.get-all}";
-    public static final String CONTROLLER_METHOD_GET_BY_ID = "${controller.method.get-by-id}";
-    public static final String CONTROLLER_METHOD_REGISTER = "${controller.method.register}";
-    public static final String CONTROLLER_METHOD_UPDATE_BY_ID = "${controller.method.update-by-id}";
-    public static final String CONTROLLER_METHOD_DELETE_BY_ID = "${controller.method.delete-by-id}";
+    // Controller paths
+    public static final String PERSONAL_CUSTOMER_CONTROLLER = "${controller.personal-customer.base-path}";
+    public static final String BUSINESS_CUSTOMER_CONTROLLER = "${controller.business-customer.base-path}";
+
+    // Method paths
+    public static final String GET_ALL_METHOD = "${controller.method.get-all}";
+    public static final String GET_BY_ID_METHOD = "${controller.method.get-by-id}";
+    public static final String REGISTER_METHOD = "${controller.method.register}";
+    public static final String UPDATE_BY_ID_METHOD = "${controller.method.update-by-id}";
+    public static final String DELETE_BY_ID_METHOD = "${controller.method.delete-by-id}";
+
+    // Path variables
+    public static final String PATH_ID_VARIABLE = "${controller.path-variable.id}";
 
 }

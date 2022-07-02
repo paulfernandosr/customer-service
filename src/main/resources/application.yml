@@ -9,13 +9,15 @@ spring:
     base-path: /customers
 
 controller:
-  personal:
+  personal-customer:
     base-path: /personal
-  business:
+  business-customer:
     base-path: /business
   method:
-    getAll: /
+    getAll:
     getById: /{id}
-    register: /
+    register:
     updateById: /{id}
     deleteById: /{id}
+  path-variable:
+    id: id
