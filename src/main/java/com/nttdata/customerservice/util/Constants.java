@@ -45,6 +45,6 @@ public class Constants {
     public static final String DELETE_BY_ID_METHOD = "${controller.method.delete-by-id}";
 
     // Path variables
-    public static final String PATH_ID_VARIABLE = "${controller.path-variable.id}";
+    public static final String ID_PATH_VARIABLE = "${controller.path-variable.id}";
 
 }

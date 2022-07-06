@@ -31,7 +31,7 @@ public class BusinessCustomerController {
     }
 
     @GetMapping(Constants.GET_BY_ID_METHOD)
-    public Mono<ResponseEntity<BusinessCustomerDto>> getById(@PathVariable(Constants.PATH_ID_VARIABLE) String id) {
+    public Mono<ResponseEntity<BusinessCustomerDto>> getById(@PathVariable(Constants.ID_PATH_VARIABLE) String id) {
         return service.getById(id).map(customer -> ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(customer));
@@ -47,7 +47,7 @@ public class BusinessCustomerController {
     }
 
     @PutMapping(Constants.UPDATE_BY_ID_METHOD)
-    public Mono<ResponseEntity<BusinessCustomerDto>> updateById(@PathVariable(Constants.PATH_ID_VARIABLE) String id, @RequestBody BusinessCustomerDto customer) {
+    public Mono<ResponseEntity<BusinessCustomerDto>> updateById(@PathVariable(Constants.ID_PATH_VARIABLE) String id, @RequestBody BusinessCustomerDto customer) {
         return validator.validate(customer)
                 .flatMap(validatedCustomer -> service.updateById(id, customer)
                         .map(updatedCustomer -> ResponseEntity.ok()
@@ -56,7 +56,7 @@ public class BusinessCustomerController {
     }
 
     @DeleteMapping(Constants.DELETE_BY_ID_METHOD)
-    public Mono<ResponseEntity<Void>> deleteById(@PathVariable(Constants.PATH_ID_VARIABLE) String id) {
+    public Mono<ResponseEntity<Void>> deleteById(@PathVariable(Constants.ID_PATH_VARIABLE) String id) {
         return service.deleteById(id).thenReturn(new ResponseEntity<>(HttpStatus.OK));
     }
 

@@ -31,7 +31,7 @@ public class PersonalCustomerController {
     }
 
     @GetMapping(Constants.GET_BY_ID_METHOD)
-    public Mono<ResponseEntity<PersonalCustomerDto>> getById(@PathVariable(Constants.PATH_ID_VARIABLE) String id) {
+    public Mono<ResponseEntity<PersonalCustomerDto>> getById(@PathVariable(Constants.ID_PATH_VARIABLE) String id) {
         return service.getById(id).map(customer -> ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(customer));
@@ -47,7 +47,7 @@ public class PersonalCustomerController {
     }
 
     @PutMapping(Constants.UPDATE_BY_ID_METHOD)
-    public Mono<ResponseEntity<PersonalCustomerDto>> updateById(@PathVariable(Constants.PATH_ID_VARIABLE) String id, @RequestBody PersonalCustomerDto customer) {
+    public Mono<ResponseEntity<PersonalCustomerDto>> updateById(@PathVariable(Constants.ID_PATH_VARIABLE) String id, @RequestBody PersonalCustomerDto customer) {
         return validator.validate(customer)
                 .flatMap(validatedCustomer -> service.updateById(id, validatedCustomer)
                         .map(updatedCustomer -> ResponseEntity.ok()
@@ -56,7 +56,7 @@ public class PersonalCustomerController {
     }
 
     @DeleteMapping(Constants.DELETE_BY_ID_METHOD)
-    public Mono<ResponseEntity<Void>> deleteById(@PathVariable(Constants.PATH_ID_VARIABLE) String id) {
+    public Mono<ResponseEntity<Void>> deleteById(@PathVariable(Constants.ID_PATH_VARIABLE) String id) {
         return service.deleteById(id).thenReturn(new ResponseEntity<>(HttpStatus.OK));
     }
 
