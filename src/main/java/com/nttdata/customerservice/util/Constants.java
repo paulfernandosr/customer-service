@@ -30,21 +30,21 @@ public class Constants {
     public static final String UTILITY_CLASS = "Utility class";
 
     // Collections
-    public static final String PERSONAL_CUSTOMERS_COLLECTION = "personalCustomers";
-    public static final String BUSINESS_CUSTOMERS_COLLECTION = "businessCustomers";
+    public static final String CUSTOMERS_COLLECTION = "customers";
 
     // Controller paths
-    public static final String PERSONAL_CUSTOMER_CONTROLLER = "${controller.personal-customer.base-path}";
-    public static final String BUSINESS_CUSTOMER_CONTROLLER = "${controller.business-customer.base-path}";
+    public static final String CUSTOMER_CONTROLLER = "/customers";
 
     // Method paths
-    public static final String GET_ALL_METHOD = "${controller.method.get-all}";
-    public static final String GET_BY_ID_METHOD = "${controller.method.get-by-id}";
-    public static final String REGISTER_METHOD = "${controller.method.register}";
-    public static final String UPDATE_BY_ID_METHOD = "${controller.method.update-by-id}";
-    public static final String DELETE_BY_ID_METHOD = "${controller.method.delete-by-id}";
+    public static final String GET_ALL_METHOD = "/all";
+    public static final String GET_BY_ID_METHOD = "/{" + ID + "}";
+    public static final String REGISTER_PERSONAL_CUSTOMER_METHOD = "/personal-customers";
+    public static final String REGISTER_BUSINESS_CUSTOMER_METHOD = "/business-customers";
+    public static final String UPDATE_BY_ID_METHOD = "/{" + ID + "}";
+    public static final String DELETE_BY_ID_METHOD = "/{" + ID + "}";
 
-    // Path variables
-    public static final String ID_PATH_VARIABLE = "${controller.path-variable.id}";
+    // Types
+    public static final String PERSONAL_CUSTOMER = "PERSONAL";
+    public static final String BUSINESS_CUSTOMER = "BUSINESS";
 
 }

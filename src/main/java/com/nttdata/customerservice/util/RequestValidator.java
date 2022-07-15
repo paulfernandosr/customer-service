@@ -21,6 +21,7 @@ public class RequestValidator {
 
     public <T> Mono<T> validate(T t) {
         if (t == null) return Mono.error(new NullRequestException(Constants.NULL_REQUEST));
+
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
 
         if (!constraintViolations.isEmpty()) {

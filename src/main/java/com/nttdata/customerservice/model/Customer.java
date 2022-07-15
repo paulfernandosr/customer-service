@@ -8,13 +8,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Builder(toBuilder = true)
-@Document(collection = Constants.BUSINESS_CUSTOMERS_COLLECTION)
-public class BusinessCustomer {
+@Document(collection = Constants.CUSTOMERS_COLLECTION)
+public class Customer {
 
     @Id
     private final String id;
+
+    private final String firstName;
+    private final String lastName;
+    private final String dni;
+
     private final String name;
     private final String city;
     private final String address;
+
+    private final String type;
 
 }
