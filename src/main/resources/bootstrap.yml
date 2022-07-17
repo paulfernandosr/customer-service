@@ -3,7 +3,7 @@ spring:
     name: customer-service
   cloud:
     config:
-      failFast: true
+      #failFast: true
       #retry:
         #initialInterval: 3000
         #multiplier: 1.3
