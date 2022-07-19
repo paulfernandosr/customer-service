@@ -38,13 +38,22 @@ public class Constants {
     // Method paths
     public static final String GET_ALL_METHOD = "/all";
     public static final String GET_BY_ID_METHOD = "/{" + ID + "}";
+    public static final String GET_ALL_PRODUCTS_BY_ID_METHOD = "/{" + ID + "}/products";
     public static final String REGISTER_PERSONAL_CUSTOMER_METHOD = "/personal-customers";
     public static final String REGISTER_BUSINESS_CUSTOMER_METHOD = "/business-customers";
     public static final String UPDATE_BY_ID_METHOD = "/{" + ID + "}";
     public static final String DELETE_BY_ID_METHOD = "/{" + ID + "}";
 
     // Types
-    public static final String PERSONAL_CUSTOMER = "PERSONAL";
-    public static final String BUSINESS_CUSTOMER = "BUSINESS";
+    public static final String PERSONAL_CUSTOMER = "CUSTOMER.PERSONAL";
+    public static final String BUSINESS_CUSTOMER = "CUSTOMER.BUSINESS";
+
+    // Bank account service
+    public static final String BANK_ACCOUNT_SERVICE_BASE_URL = "${bankAccountService.baseUrl}";
+    public static final String GET_BANK_ACCOUNTS_BY_CUSTOMER_ID_METHOD = "${bankAccountService.method.getBankAccountsByCustomerId}";
+
+    // Credit service
+    public static final String CREDIT_SERVICE_BASE_URL = "${creditService.baseUrl}";
+    public static final String GET_CREDITS_BY_CUSTOMER_ID_METHOD = "${creditService.method.getCreditsByCustomerId}";
 
 }

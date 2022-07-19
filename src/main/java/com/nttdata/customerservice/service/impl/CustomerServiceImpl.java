@@ -1,12 +1,12 @@
 package com.nttdata.customerservice.service.impl;
 
-import com.nttdata.customerservice.dto.BusinessCustomerDto;
-import com.nttdata.customerservice.dto.CustomerDto;
-import com.nttdata.customerservice.dto.PersonalCustomerDto;
+import com.nttdata.customerservice.dto.*;
 import com.nttdata.customerservice.exception.CustomerNotFoundException;
 import com.nttdata.customerservice.exception.DuplicateCustomerException;
 import com.nttdata.customerservice.model.Customer;
 import com.nttdata.customerservice.repo.ICustomerRepo;
+import com.nttdata.customerservice.service.IBankAccountService;
+import com.nttdata.customerservice.service.ICreditService;
 import com.nttdata.customerservice.service.ICustomerService;
 import com.nttdata.customerservice.util.Constants;
 import com.nttdata.customerservice.util.CustomerMapper;
@@ -15,15 +15,26 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements ICustomerService {
 
     private final ICustomerRepo repo;
+    private final ICreditService creditService;
+    private final IBankAccountService bankAccountService;
 
     @Override
     public Flux<CustomerDto> getAll() {
         return repo.findAll().map(CustomerMapper::toCustomerDto);
+    }
+
+    @Override
+    public Flux<ProductDto> getAllProductsById(String id) {
+        return Mono.zip(creditService.getAllByCustomerId(id).collectList(), bankAccountService.getAllByCustomerId(id).collectList())
+                .flatMapIterable(tuple -> Stream.concat(tuple.getT1().stream(), tuple.getT2().stream()).collect(Collectors.toList()));
     }
 
     @Override

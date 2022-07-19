@@ -5,6 +5,9 @@ import com.nttdata.customerservice.dto.CustomerDto;
 import com.nttdata.customerservice.dto.PersonalCustomerDto;
 import com.nttdata.customerservice.model.Customer;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class CustomerMapper {
 
     private CustomerMapper() {
@@ -23,6 +26,7 @@ public class CustomerMapper {
                 .type(customerDto.getType())
                 .build();
     }
+
 
     public static Customer toCustomer(PersonalCustomerDto customerDto) {
         return Customer.builder()

@@ -3,6 +3,7 @@ package com.nttdata.customerservice.controller;
 import com.nttdata.customerservice.dto.BusinessCustomerDto;
 import com.nttdata.customerservice.dto.CustomerDto;
 import com.nttdata.customerservice.dto.PersonalCustomerDto;
+import com.nttdata.customerservice.dto.ProductDto;
 import com.nttdata.customerservice.service.ICustomerService;
 import com.nttdata.customerservice.util.Constants;
 import com.nttdata.customerservice.util.RequestValidator;
@@ -30,6 +31,13 @@ public class CustomerController {
         return Mono.just(ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(service.getAll()));
+    }
+
+    @GetMapping(Constants.GET_ALL_PRODUCTS_BY_ID_METHOD)
+    public Mono<ResponseEntity<Flux<ProductDto>>> getAllProductsById(@PathVariable(Constants.ID) String id) {
+        return Mono.just(ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(service.getAllProductsById(id)));
     }
 
     @GetMapping(Constants.GET_BY_ID_METHOD)
