@@ -2,13 +2,8 @@ package com.nttdata.customerservice.controller;
 
 import com.nttdata.customerservice.dto.CustomerDto;
 import com.nttdata.customerservice.dto.ProductDto;
-import com.nttdata.customerservice.model.Customer;
-import com.nttdata.customerservice.repo.ICustomerRepo;
-import com.nttdata.customerservice.service.IBankAccountService;
-import com.nttdata.customerservice.service.ICreditService;
 import com.nttdata.customerservice.service.impl.CustomerServiceImpl;
 import com.nttdata.customerservice.util.Constants;
-import com.nttdata.customerservice.util.CustomerMapper;
 import com.nttdata.customerservice.util.RequestValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
