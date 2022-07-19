@@ -21,7 +21,7 @@ public class CreditServiceImpl implements ICreditService {
     private final PropertiesConfig propertiesConfig;
 
     public CreditServiceImpl(WebClient.Builder webClientBuilder, PropertiesConfig propertiesConfig) {
-        this.webClient = webClientBuilder.baseUrl(propertiesConfig.creditServiceBaseUrl).build();
+        this.webClient = webClientBuilder.baseUrl(propertiesConfig.getCreditServiceBaseUrl()).build();
         this.propertiesConfig = propertiesConfig;
     }
 
@@ -29,7 +29,7 @@ public class CreditServiceImpl implements ICreditService {
     @CircuitBreaker(name = "creditService", fallbackMethod = "fallbackGetAllByCustomerId")
     @TimeLimiter(name = "creditService", fallbackMethod = "fallbackGetAllByCustomerId")
     public Flux<ProductDto> getAllByCustomerId(String customerId) {
-        return webClient.get().uri(propertiesConfig.getCreditsByCustomerIdMethod, customerId)
+        return webClient.get().uri(propertiesConfig.getGetCreditsByCustomerIdMethod(), customerId)
                 .retrieve()
                 .bodyToFlux(ProductDto.class);
     }

@@ -1,11 +1,10 @@
 package com.nttdata.customerservice.service;
 
-import com.nttdata.customerservice.dto.CustomerDto;
+import com.nttdata.customerservice.dto.ProductDto;
 import com.nttdata.customerservice.model.Customer;
 import com.nttdata.customerservice.repo.ICustomerRepo;
 import com.nttdata.customerservice.service.impl.CustomerServiceImpl;
 import com.nttdata.customerservice.util.Constants;
-import com.nttdata.customerservice.util.CustomerMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,6 +24,12 @@ class CustomerServiceTest {
 
     @Mock
     private ICustomerRepo repo;
+
+    @Mock
+    private ICreditService creditService;
+
+    @Mock
+    private IBankAccountService bankAccountService;
 
     @Test
     void getAll() {
@@ -47,6 +52,28 @@ class CustomerServiceTest {
         Mockito.when(repo.findAll()).thenReturn(Flux.fromIterable(customers));
 
         StepVerifier.create(customerService.getAll())
+                .expectNextCount(2)
+                .verifyComplete();
+    }
+
+    @Test
+    void getAllProductsById() {
+        List<ProductDto> bankAccounts = List.of(
+                ProductDto.builder()
+                        .id("62d54849519dc31e154c27cc")
+                        .accountNumber("12345678")
+                        .cci("12345678")
+                        .balance(500.0)
+                        .customerId("13d54849519dc31e154c27aa")
+                        .monthlyMovementLimit(5)
+                        .monthlyMinimumBalance(200.0)
+                        .type("ACCOUNT.SAVINGS.PERSONAL")
+                        .build());
+
+        Mockito.when(creditService.getAllByCustomerId("13d54849519dc31e154c27aa")).thenReturn(Flux.empty());
+        Mockito.when(bankAccountService.getAllByCustomerId("13d54849519dc31e154c27aa")).thenReturn(Flux.fromIterable(bankAccounts));
+
+        StepVerifier.create(customerService.getAllProductsById("13d54849519dc31e154c27aa"))
                 .expectNextCount(2)
                 .verifyComplete();
     }
