@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Flux<ProductDto> getAllProductsById(String id) {
-        return Mono.zip(creditService.getAllByCustomerId(id).collectList(), bankAccountService.getAllByCustomerId(id).collectList())
+        return Mono.zip(creditService.getCreditsByCustomerId(id).collectList(), bankAccountService.getAllByCustomerId(id).collectList())
                 .flatMapIterable(tuple -> Stream.concat(tuple.getT1().stream(), tuple.getT2().stream()).collect(Collectors.toList()));
     }
 

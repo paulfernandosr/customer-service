@@ -49,11 +49,12 @@ public class Constants {
     public static final String BUSINESS_CUSTOMER = "CUSTOMER.BUSINESS";
 
     // Bank account service
-    public static final String BANK_ACCOUNT_SERVICE_BASE_URL = "${bankAccountService.baseUrl}";
-    public static final String GET_BANK_ACCOUNTS_BY_CUSTOMER_ID_METHOD = "${bankAccountService.method.getBankAccountsByCustomerId}";
+    public static final String BANK_ACCOUNT_SERVICE_BASE_URL = "${bankAccountService.baseUrl:http://localhost:8099/bank-account-service}";
+    public static final String METHOD_GET_BANK_ACCOUNTS_BY_CUSTOMER_ID = "${bankAccountService.method.getBankAccountsByCustomerId:/bank-accounts/customers/{customerId}}";
+
 
     // Credit service
-    public static final String CREDIT_SERVICE_BASE_URL = "${creditService.baseUrl}";
-    public static final String GET_CREDITS_BY_CUSTOMER_ID_METHOD = "${creditService.method.getCreditsByCustomerId}";
+    public static final String CREDIT_SERVICE_BASE_URL = "${creditService.baseUrl:http://localhost:8099/bank-account-service}";
+    public static final String METHOD_GET_CREDITS_BY_CUSTOMER_ID = "${creditService.method.getCreditsByCustomerId:/bank-accounts/customers/{customerId}";
 
 }

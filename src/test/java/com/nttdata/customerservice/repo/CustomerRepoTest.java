@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 import java.util.List;
@@ -18,7 +19,7 @@ class CustomerRepoTest {
     @Autowired
     private ICustomerRepo repo;
 
-    //@Test
+    @Test
     void findAll() {
         List<Customer> customers = List.of(
                 Customer.builder()
@@ -36,7 +37,9 @@ class CustomerRepoTest {
                         .type(Constants.PERSONAL_CUSTOMER)
                         .build());
 
-        StepVerifier.create(repo.findAll())
+        Flux<Customer> publisher = repo.findAll().thenMany(Flux.fromIterable(customers));
+
+        StepVerifier.create(publisher)
                 .expectNextCount(2)
                 .verifyComplete();
     }

@@ -5,6 +5,6 @@ import reactor.core.publisher.Flux;
 
 public interface ICreditService {
 
-    Flux<ProductDto> getAllByCustomerId(String customerId);
+    Flux<ProductDto> getCreditsByCustomerId(String customerId);
 
 }

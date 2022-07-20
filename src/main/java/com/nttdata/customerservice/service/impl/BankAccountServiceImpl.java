@@ -18,7 +18,6 @@ import java.util.concurrent.TimeoutException;
 public class BankAccountServiceImpl implements IBankAccountService {
 
     private final WebClient webClient;
-
     private final PropertiesConfig propertiesConfig;
 
     public BankAccountServiceImpl(WebClient.Builder webClientBuilder, PropertiesConfig propertiesConfig) {
@@ -30,7 +29,7 @@ public class BankAccountServiceImpl implements IBankAccountService {
     @CircuitBreaker(name = "bankAccountService", fallbackMethod = "fallbackGetAllByCustomerId")
     @TimeLimiter(name = "bankAccountService", fallbackMethod = "fallbackGetAllByCustomerId")
     public Flux<ProductDto> getAllByCustomerId(String customerId) {
-        return webClient.get().uri(propertiesConfig.getGetBankAccountsByCustomerIdMethod(), customerId)
+        return webClient.get().uri(propertiesConfig.getMethodGetBankAccountsByCustomerId(), customerId)
                 .retrieve()
                 .bodyToFlux(ProductDto.class);
     }

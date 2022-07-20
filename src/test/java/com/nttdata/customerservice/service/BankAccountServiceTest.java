@@ -40,7 +40,7 @@ class BankAccountServiceTest {
         mockWebServer = new MockWebServer();
         PropertiesConfig propertiesConfig = PropertiesConfig.builder()
                 .bankAccountServiceBaseUrl(mockWebServer.url("/bank-account-service").toString())
-                .getBankAccountsByCustomerIdMethod("/bank-accounts/customers/{customerId}")
+                .methodGetBankAccountsByCustomerId("/bank-accounts/customers/{customerId}")
                 .build();
         bankAccountService = new BankAccountServiceImpl(WebClient.builder(), propertiesConfig);
     }

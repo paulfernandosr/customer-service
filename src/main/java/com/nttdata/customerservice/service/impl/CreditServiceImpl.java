@@ -28,8 +28,8 @@ public class CreditServiceImpl implements ICreditService {
     @Override
     @CircuitBreaker(name = "creditService", fallbackMethod = "fallbackGetAllByCustomerId")
     @TimeLimiter(name = "creditService", fallbackMethod = "fallbackGetAllByCustomerId")
-    public Flux<ProductDto> getAllByCustomerId(String customerId) {
-        return webClient.get().uri(propertiesConfig.getGetCreditsByCustomerIdMethod(), customerId)
+    public Flux<ProductDto> getCreditsByCustomerId(String customerId) {
+        return webClient.get().uri(propertiesConfig.getMethodGetCreditsByCustomerIdMethod(), customerId)
                 .retrieve()
                 .bodyToFlux(ProductDto.class);
     }
