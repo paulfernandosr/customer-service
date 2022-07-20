@@ -18,7 +18,7 @@ class CustomerRepoTest {
     @Autowired
     private ICustomerRepo repo;
 
-    @Test
+    //@Test
     void findAll() {
         List<Customer> customers = List.of(
                 Customer.builder()

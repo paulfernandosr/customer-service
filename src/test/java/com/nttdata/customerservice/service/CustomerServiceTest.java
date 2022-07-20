@@ -74,7 +74,7 @@ class CustomerServiceTest {
         Mockito.when(bankAccountService.getAllByCustomerId("13d54849519dc31e154c27aa")).thenReturn(Flux.fromIterable(bankAccounts));
 
         StepVerifier.create(customerService.getAllProductsById("13d54849519dc31e154c27aa"))
-                .expectNextCount(2)
+                .expectNextCount(1)
                 .verifyComplete();
     }
 
