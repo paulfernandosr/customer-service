@@ -5,6 +5,6 @@ import reactor.core.publisher.Flux;
 
 public interface IBankAccountService {
 
-    Flux<ProductDto> getAllByCustomerId(String customerId);
+    Flux<ProductDto> getBankAccountsByCustomerId(String customerId);
 
 }

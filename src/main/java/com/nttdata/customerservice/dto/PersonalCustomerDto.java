@@ -5,7 +5,9 @@ import com.nttdata.customerservice.util.Constants;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Getter
 @Builder(toBuilder = true)
@@ -14,13 +16,13 @@ public class PersonalCustomerDto {
 
     private final String id;
 
-    @NotNull(message = Constants.NOT_NULL)
+    @NotNull
     private final String firstName;
 
-    @NotNull(message = Constants.NOT_NULL)
+    @NotNull
     private final String lastName;
 
-    @NotNull(message = Constants.NOT_NULL)
+    @NotNull
     private final String dni;
 
 }

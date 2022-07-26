@@ -11,7 +11,7 @@ public interface ICustomerService {
 
     Flux<CustomerDto> getAll();
 
-    Flux<ProductDto> getAllProductsById(String id);
+    Flux<ProductDto> getProductsById(String id);
 
     Mono<CustomerDto> getById(String id);
 

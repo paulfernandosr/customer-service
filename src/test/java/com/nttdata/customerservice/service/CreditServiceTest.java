@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nttdata.customerservice.config.PropertiesConfig;
 import com.nttdata.customerservice.dto.ProductDto;
-import com.nttdata.customerservice.service.impl.BankAccountServiceImpl;
+import com.nttdata.customerservice.service.impl.CreditServiceImpl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -20,14 +20,15 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.test.StepVerifier;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
-class BankAccountServiceTest {
+class CreditServiceTest {
 
-    private BankAccountServiceImpl bankAccountService;
+    private CreditServiceImpl creditService;
     private static MockWebServer mockBackEnd;
 
     @BeforeAll
@@ -44,37 +45,34 @@ class BankAccountServiceTest {
     @BeforeEach
     void initialize() {
         PropertiesConfig propertiesConfig = PropertiesConfig.builder()
-                .bankAccountServiceBaseUrl(mockBackEnd.url("/bank-account-service").toString())
-                .methodGetBankAccountsByCustomerId("/bank-accounts/customers/{customerId}")
+                .creditServiceBaseUrl(mockBackEnd.url("/credit-service").toString())
+                .methodGetCreditsByCustomerIdMethod("/credits/customers/{customerId}")
                 .build();
-        bankAccountService = new BankAccountServiceImpl(WebClient.builder(), propertiesConfig);
+        creditService = new CreditServiceImpl(WebClient.builder(), propertiesConfig);
     }
 
     @Test
-    void getAllProductsById() throws JsonProcessingException, InterruptedException {
-        List<ProductDto> bankAccounts = List.of(
+    void getCreditsByCustomerId() throws JsonProcessingException, InterruptedException {
+        List<ProductDto> credits = List.of(
                 ProductDto.builder()
-                        .id("62d9880f2e235e0d78bab55b")
-                        .accountNumber("12345")
-                        .cci("12345")
-                        .balance(30.0)
+                        .id("62d9880b4ed80d50de1636e2")
+                        .amountToPay(500.0)
+                        .amountPaid(0.0)
+                        .paymentDate(LocalDate.of(2023, 5, 5))
+                        .type("CREDIT.PERSONAL")
                         .customerId("62d9777c025a770fc6e3e7c5")
-                        .monthlyMovementLimit(3)
-                        .transactionLimit(3)
-                        .type("ACCOUNT.SAVINGS.PERSONAL")
                         .build());
 
         mockBackEnd.enqueue(new MockResponse()
-                .setBody(new ObjectMapper().writeValueAsString(bankAccounts))
+                .setBody(new ObjectMapper().writeValueAsString(credits))
                 .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
 
-        StepVerifier.create(bankAccountService.getBankAccountsByCustomerId("62d9777c025a770fc6e3e7c5"))
-                .expectNext(bankAccounts.get(0))
+        StepVerifier.create(creditService.getCreditsByCustomerId("62d9777c025a770fc6e3e7c5"))
+                .expectNext(credits.get(0))
                 .verifyComplete();
 
         RecordedRequest recordedRequest = mockBackEnd.takeRequest();
         assertEquals("GET", recordedRequest.getMethod());
-        assertEquals("/bank-account-service/bank-accounts/customers/62d9777c025a770fc6e3e7c5", recordedRequest.getPath());
+        assertEquals("/credit-service/credits/customers/62d9777c025a770fc6e3e7c5", recordedRequest.getPath());
     }
-
 }

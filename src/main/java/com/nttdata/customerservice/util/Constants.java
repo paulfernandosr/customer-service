@@ -38,9 +38,9 @@ public class Constants {
     // Method paths
     public static final String GET_ALL_METHOD = "/all";
     public static final String GET_BY_ID_METHOD = "/{" + ID + "}";
-    public static final String GET_ALL_PRODUCTS_BY_ID_METHOD = "/{" + ID + "}/products";
-    public static final String REGISTER_PERSONAL_CUSTOMER_METHOD = "/personal-customers";
-    public static final String REGISTER_BUSINESS_CUSTOMER_METHOD = "/business-customers";
+    public static final String GET_PRODUCTS_BY_ID_METHOD = "/{" + ID + "}/products";
+    public static final String REGISTER_PERSONAL_CUSTOMER_METHOD = "/personal";
+    public static final String REGISTER_BUSINESS_CUSTOMER_METHOD = "/business";
     public static final String UPDATE_BY_ID_METHOD = "/{" + ID + "}";
     public static final String DELETE_BY_ID_METHOD = "/{" + ID + "}";
 

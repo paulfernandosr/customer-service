@@ -26,19 +26,19 @@ public class BankAccountServiceImpl implements IBankAccountService {
     }
 
     @Override
-    @CircuitBreaker(name = "bankAccountService", fallbackMethod = "fallbackGetAllByCustomerId")
-    @TimeLimiter(name = "bankAccountService", fallbackMethod = "fallbackGetAllByCustomerId")
-    public Flux<ProductDto> getAllByCustomerId(String customerId) {
+    @CircuitBreaker(name = "bankAccountService", fallbackMethod = "fallbackGetBankAccountsByCustomerId")
+    @TimeLimiter(name = "bankAccountService", fallbackMethod = "fallbackGetBankAccountsByCustomerId")
+    public Flux<ProductDto> getBankAccountsByCustomerId(String customerId) {
         return webClient.get().uri(propertiesConfig.getMethodGetBankAccountsByCustomerId(), customerId)
                 .retrieve()
                 .bodyToFlux(ProductDto.class);
     }
 
-    private Flux<ProductDto> fallbackGetAllByCustomerId(String customerId, WebClientResponseException e) {
+    private Flux<ProductDto> fallbackGetBankAccountsByCustomerId(String customerId, WebClientResponseException e) {
         return Flux.error(new DomainException(e.getStatusCode(), e.getMessage()));
     }
 
-    private Flux<ProductDto> fallbackGetAllByCustomerId(String customerId, TimeoutException e) {
+    private Flux<ProductDto> fallbackGetBankAccountsByCustomerId(String customerId, TimeoutException e) {
         return Flux.error(new DomainException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
     }
 

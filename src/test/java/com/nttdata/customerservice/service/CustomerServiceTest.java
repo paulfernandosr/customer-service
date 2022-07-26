@@ -71,9 +71,9 @@ class CustomerServiceTest {
                         .build());
 
         Mockito.when(creditService.getCreditsByCustomerId("13d54849519dc31e154c27aa")).thenReturn(Flux.empty());
-        Mockito.when(bankAccountService.getAllByCustomerId("13d54849519dc31e154c27aa")).thenReturn(Flux.fromIterable(bankAccounts));
+        Mockito.when(bankAccountService.getBankAccountsByCustomerId("13d54849519dc31e154c27aa")).thenReturn(Flux.fromIterable(bankAccounts));
 
-        StepVerifier.create(customerService.getAllProductsById("13d54849519dc31e154c27aa"))
+        StepVerifier.create(customerService.getProductsById("13d54849519dc31e154c27aa"))
                 .expectNextCount(1)
                 .verifyComplete();
     }

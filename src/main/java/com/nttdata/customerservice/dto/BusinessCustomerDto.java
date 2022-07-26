@@ -14,13 +14,13 @@ public class BusinessCustomerDto {
 
     private final String id;
 
-    @NotNull(message = Constants.NOT_NULL)
+    @NotNull
     private final String name;
 
-    @NotNull(message = Constants.NOT_NULL)
+    @NotNull
     private final String city;
 
-    @NotNull(message = Constants.NOT_NULL)
+    @NotNull
     private final String address;
 
 }
