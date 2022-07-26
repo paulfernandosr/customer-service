@@ -15,7 +15,6 @@ import java.util.List;
 
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
-@TestPropertySource(properties = "spring.mongodb.embedded.version=3.5.5")
 class CustomerRepoTest {
 
     @Autowired

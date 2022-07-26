@@ -1,6 +1,9 @@
 spring:
   application:
     name: customer-service
+  mongodb:
+    embedded:
+      version: 3.5.5
   cloud:
     config:
       #failFast: true
